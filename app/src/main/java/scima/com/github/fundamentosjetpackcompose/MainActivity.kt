@@ -21,6 +21,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
+import androidx.compose.ui.res.painterResource
 import scima.com.github.fundamentosjetpackcompose.ui.theme.FundamentosJetpackComposeTheme
 
 class MainActivity : ComponentActivity() {
@@ -30,7 +35,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             FundamentosJetpackComposeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    NotificationBage(Modifier.padding(innerPadding))
+                    CardMensagem(Modifier.padding(innerPadding))
                 }
             }
         }
@@ -76,6 +81,27 @@ fun NotificationBage(modifier: Modifier = Modifier) {
 
 }
 
+@Composable
+fun CardMensagem(modifier: Modifier = Modifier) {
+    Row(modifier = modifier.padding(16.dp)) {
+        Image(
+            painter = painterResource(id = R.drawable.avatar),
+            contentDescription = "Foto do contato",
+            modifier = Modifier
+                .size(52.dp)
+                .clip(CircleShape)
+        )
+
+        Spacer(modifier = Modifier.width(8.dp))
+
+        Column {
+            Text(text = "Autor da mensagem")
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(text = "Conteúdo da mensagem")
+        }
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun PreviewFuncaoInicial() {
@@ -91,3 +117,12 @@ fun PreviewNotificationBage() {
         NotificationBage()
     }
 }
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewCardMensagem() {
+    FundamentosJetpackComposeTheme {
+        CardMensagem()
+    }
+}
+
